@@ -1,0 +1,45 @@
+{
+  "name": "int-nextapp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.18",
+    "@mantine/form": "^7.4.2",
+    "@tanstack/react-query": "^4.36.1",
+    "@types/jwt-decode": "^3.1.0",
+    "axios": "^1.6.5",
+    "class-variance-authority": "^0.7.0",
+    "iconsax-react": "^0.0.8",
+    "jwt-decode": "^3.1.2",
+    "next": "14.0.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-drag-drop-files": "^2.3.10",
+    "react-icons": "^5.0.1",
+    "react-slick": "^0.29.0",
+    "react-toastify": "^10.0.4",
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.8",
+    "tailwind-merge": "^2.2.0",
+    "tailwind-scrollbar": "^3.0.5",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/react-slick": "^0.23.13",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
