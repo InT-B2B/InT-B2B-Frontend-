@@ -2,6 +2,7 @@ import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 import { VariantProps, cva } from 'class-variance-authority';
 import { twMerge } from 'tailwind-merge';
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const buttonVariants = cva(
     'relative px-4 py-3 flex items-center justify-center gap-5 w-fit h-[48px] rounded-[16px] font-manropeB text-white-100',
@@ -39,8 +40,8 @@ export interface ButtonVariants
 export interface ButtonProps extends ButtonVariants {
     children: React.ReactNode;
     className?: React.ComponentProps<'div'>['className'];
-    leftIcon?: React.ReactNode;
-    rightIcon?: React.ReactNode;
+    leftIcon?: React.ReactNode | typeof FontAwesomeIcon;
+    rightIcon?: React.ReactNode | typeof FontAwesomeIcon;
     isLoading?: boolean;
     disabled?: boolean;
     href?: object | string;

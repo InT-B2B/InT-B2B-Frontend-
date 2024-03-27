@@ -3,9 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 
 import MainLayout from "@/components/Layout/MainLayout";
 import SEO from "@/components/SEO";
-import CategoriesNav from "../categoriesNav/CategoriesNav";
+import CategoryLayout from "@/components/Layout/category-layout";
 import ProductCardWrapper from "./productCardWrapper/productCardWrapper";
-import { fetchLimitedOffers, fetchRecommendation } from "@/http/marketplace";
+import { fetchLimitedOffers, fetchRecommendation, getCategoryNames } from "@/http/marketplace";
 
 function LandingPage() {
 
@@ -13,31 +13,27 @@ function LandingPage() {
     const { isLoading: isRecommendationLoading, data: RecommendationData } = useQuery(['recommendations'], fetchRecommendation)
 
     return (
-        <MainLayout
-            activePage="marketplace"
-            showDashboardSidebar={false}
-            showFooter={true}
-            showTopbar={true}
-        >
+        <CategoryLayout>
             <SEO title='InT Marketplace' description='InT marketplace - Browse varieties of products based on choice.' image="" url="" />
-            <CategoriesNav navItems={[]} isLoading={false} />
             <div className="py-6 px-4 overflow-hidden w-full lg:max-w-[1350px] mx-auto">
                 <div className="max-w-[1240px] mx-auto">
                     <ProductCardWrapper
                         title="Popular Products"
-                        productsList={{ isLoading: isLimitedOfferLoading, items: limitedOffersData }}
+                        productsList={{ isLoading: isLimitedOfferLoading, items: RecommendationData }}
                         showTopPicks={true}
-                        showAll={false}
+                        showAll={true}
+                        allProducts={false}
                     />
                     <ProductCardWrapper
                         title="Limited Offers"
-                        productsList={{ isLoading: isRecommendationLoading, items: RecommendationData }}
+                        productsList={{ isLoading: isRecommendationLoading, items: limitedOffersData }}
                         showTopPicks={false}
-                        showAll={false}
+                        showAll={true}
+                        allProducts={false}
                     />
                 </div>
             </div>
-        </MainLayout>
+        </CategoryLayout>
     );
 };
 

@@ -11,7 +11,7 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
     const [userCameFrom, setUserCameFrom] = useState<string | undefined>();
     const [userCameFromForOAuth, setUserCameFromForOAuth] = useState<string | undefined>();
 
-    const [formData, setFormData] = useState({})
+    const [formData, setFormData] = useState<FormData>()
 
     const handleAuth = (value: AuthResponse | undefined) => {
         setAuth(value);
@@ -33,7 +33,7 @@ export function AuthContextProvider({ children }: { children: React.ReactNode })
         setUserCameFromForOAuth(value);
     };
 
-    const handleFormData = (value) => {
+    const handleFormData = (value: FormData) => {
         setFormData(value);
     };
 

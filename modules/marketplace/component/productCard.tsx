@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+
+import addIcon from '../../../public/assets/images/add.svg'
+import isAuthenticated from "@/helpers/isAuthenticated";
 
 
 interface MarketPlaceProductCardProps {
@@ -46,6 +49,16 @@ function ProductCard({
         5: { src: "../../../public/assets/images/stars/5StarRating.png", alt: '5 Stars' },
     };
 
+      const [auth, setAuth] = useState(false);
+      useEffect(() => {
+        const token = localStorage.getItem('accessToken');
+        const isLoggedIn = isAuthenticated(token as string);
+
+        if (isLoggedIn) {
+        setAuth(true);
+        }
+    }, []);
+
     const starRating = rating in stars;
 
     function formatPrice(price: number) {
@@ -64,7 +77,7 @@ function ProductCard({
     }
 
     return (
-        <div className="p-[16px] border-[1px] border-custom-color32 rounded-[8px] h-full w-[286px] max-w-full">
+        <div className="p-[16px] border-[1px] border-custom-color32 rounded-[8px] h-full w-[286px] max-w-full min-w-[200px]">
             <div className="flex flex-col h-full items-start">
                 {/* Product Image */}
                 <Link href={`/marketplace/product-details/${id}`} className="relative flex flex-col">
@@ -107,15 +120,17 @@ function ProductCard({
                             />
                         )}
                     </div>
-                    {/* Product Name */}
-                    <p className="font-manropeL mt-[0.5rem] text-brand-green-shade10 w-full text-ellipsis whitespace-nowrap overflow-hidden text-[14px] font-normal leading-[20px] letter tracking-[0.014px] pt-[8px]">
-                        {name?.length > 30 ? <span>{productNameTrimmed}...</span> : name}
-                    </p>
-                    {/* Product Price */}
-                    <h1 className="font-manropeL text-brand-green-shade10 text-[18px] font-bold leading-[20px] letter pt-[2px] pb-[8px]">
-                        {`ETB ${formatPrice(price)}`}
-                    </h1>
                 </Link>
+                {/* Product Name */}
+                <p className="font-manropeL mt-[0.5rem] text-brand-green-shade10 w-full text-ellipsis whitespace-nowrap overflow-hidden text-[14px] font-normal leading-[20px] letter tracking-[0.014px] pt-[8px]">
+                    {name?.length > 30 ? <span>{productNameTrimmed}...</span> : name}
+                </p>
+                {/* Product Price */}
+                { auth && (
+                <h1 className="font-manropeL text-brand-green-shade10 text-[18px] font-bold leading-[20px] letter pt-[2px] pb-[8px]">
+                    {`ETB ${formatPrice(price)}`}
+                </h1>
+                )}
                 {/* Product Owner */}
                 <p className="font-manropeL text-custom-color15 text-[14px] font-normal leading-[20px] letter tracking-[0.035px] pb-[20px]">
                     By:{' '}
@@ -136,18 +151,23 @@ function ProductCard({
                         )}
                     </div>
                 </Link>
-                <div className="pt-[15px] flex justify-center items-center gap-6">
+                <div className="pt-[15px] flex flex-col w-[100%] justify-center items-center gap-2">
                     <Button
-                        href=""
-                        className="text-[16px] rounded-[8px] mb-[20px]"
+                        href={`/marketplace/product-details/${id}`}
+                        className="text-[14px] rounded-[8px] mb-[2px] w-[100%]"
+                        intent={'primary'}
+                        size={'md'}
                     >
                         View Item
                     </Button>
                     <Button
                         href=""
-                        className="text-[16px] rounded-[8px] mb-[20px]"
+                        className="text-[14px] rounded-[8px] mb-[2px] w-[100%]"
+                        intent={'secondary'}
+                        size={'md'}
+                        rightIcon={<Image src={addIcon} alt="Add Icon" style={{ fill: 'red' }} />}
                     >
-                        Add to Cart
+                        Add To Cart
                     </Button>
                 </div>
             </div>

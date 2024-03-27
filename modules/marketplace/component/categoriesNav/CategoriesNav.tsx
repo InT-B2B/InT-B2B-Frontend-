@@ -4,23 +4,30 @@ import Image from "next/image";
 
 import more from "../../../../public/assets/ic_outline-arrow-back-ios.svg";
 
-type CategoryType = {
-    name: string;
-    subcategories: { name?: string }[];
-};
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTags, faHeadset, faGem, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
-interface CategoriesNavProps {
-    navItems: CategoryType[];
-    isLoading: boolean;
-}
-
-const CategoriesNav = (props: CategoriesNavProps) => {
+const CategoriesNav = ({navItems, isLoading}) => {
     return (
         <div className={`font-ppReg shadow-sm -mt-4 px-4 py-5 relative`}>
-            <aside className="max-w-[1240px] mx-auto justify-between flex xl:gap-8 items-center z-50">
-                <Link href="/marketplace/allcategories" className="text-[#64D1FF] text-lg hover:underline">All Categories</Link>
-                <Image src={more} alt={""} />
-            </aside>
+            <div className="max-w-[1240px] mx-auto flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+                <div className="flex items-center justify-center bg-white rounded-lg p-4 md:w-[300px]">
+                    <div className="w-8 h-8 flex items-center justify-center bg-transparent"><FontAwesomeIcon icon={faTags} className="text-[#64D1FF]"/></div>
+                    <h3 className="text-light text-lg ml-4">Get Up to 30% off New Arrivals</h3>
+                </div>
+                <div className="flex items-center justify-center bg-white rounded-lg p-4 md:w-[300px]">
+                    <div className="w-8 h-8 flex items-center justify-center bg-transparent"><FontAwesomeIcon icon={faHeadset} className="text-[#64D1FF]"/></div>
+                    <h3 className="text-light text-lg ml-4">24/7 Customer Support</h3>
+                </div>
+                <div className="flex items-center justify-center bg-white rounded-lg p-4 md:w-[300px]">
+                    <div className="w-8 h-8 flex items-center justify-center bg-transparent"><FontAwesomeIcon icon={faGem} className="text-[#64D1FF]"/></div>
+                    <h3 className="text-light text-lg ml-4">Best Quality Products</h3>
+                </div>
+                <div className="flex items-center justify-center bg-white rounded-lg p-4 md:w-[300px]">
+                    <Link href="/marketplace/allcategories/" className="text-[#64D1FF] text-lg hover:underline">Explore All Categories</Link>
+                    <Image src={more} alt={""} className="ml-4" />
+                </div>
+            </div>
         </div>
     );
 };
